@@ -7,7 +7,7 @@
     </div>
     <main class="container content" v-if="listDatas">
       <transition-group tag="div" class="dragons-list">
-        <div to="/details" v-for="data in listDatas" :key="data.id">
+        <div v-for="data in listDatas" :key="data.id">
           <router-link tag="div" to="/details" class="dragon">
             <font-awesome-icon :icon="['fas', 'dragon']" />
             <h3>{{ data.name }}</h3>
@@ -15,19 +15,25 @@
           </router-link>
           <font-awesome-icon
             @click="editItem(data.id, data.name, data.type)"
-            :icon="['fas', 'jedi']"
+            :icon="['fas', 'pencil-ruler']"
             class="icon-options"
-            :title="`Editar ${data.name}`"
+            :title="`Editar '${data.name}'`"
           />
           <font-awesome-icon
             @click="removeItem(data.id, data.name)"
             :icon="['fas', 'trash']"
             class="icon-options"
-            :title="`Excluir ${data.name}`"
+            :title="`Excluir '${data.name}'`"
           />
         </div>
       </transition-group>
-      <!-- <router-link to="/registration">registrar novos Dragões</router-link> -->
+      <router-link to="/registration" class="plus-register">
+        <font-awesome-icon
+          :icon="['fa', 'plus']"
+          class=""
+          title="clique aqui para criar um Dragão"
+        />
+      </router-link>
     </main>
   </div>
 </template>
@@ -100,6 +106,7 @@ export default {
         )
           .then(() => {
             if (formData.name !== null || formData.type !== null) {
+              this.getDatas();
               alert(`Dragão atualizado com sucesso 🐲!`);
             }
           })
@@ -121,6 +128,7 @@ export default {
           { method: "DELETE" }
         )
           .then(() => {
+            this.getDatas();
             alert(`${name} excluido com sucesso`);
           })
           .catch((error) =>
@@ -144,6 +152,7 @@ export default {
 .content {
   margin-bottom: 20rem;
 }
+
 .title {
   text-align: center;
   h2 {
@@ -244,6 +253,30 @@ export default {
         fill: $error;
       }
     }
+  }
+}
+
+.plus-register {
+  background-color: $two;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 60px 15px 15px 15px;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+
+  @include tamanho-tela(desktop) {
+    right: 10px;
+    bottom: 10px;
+  }
+
+  svg {
+    width: 35px;
+    height: 35px;
   }
 }
 </style>

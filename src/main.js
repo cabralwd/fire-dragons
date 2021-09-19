@@ -3,10 +3,16 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faDragon, faTrash, faJedi } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDragon,
+  faTrash,
+  faPencilRuler,
+  faPlus,
+  faSignOutAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faDragon, faTrash, faJedi);
+library.add(faDragon, faTrash, faPencilRuler, faPlus, faSignOutAlt);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
