@@ -24,6 +24,10 @@ export default new Vuex.Store({
       if (state.user === "@flygon" && state.password === "flygonfire2021") {
         state.hasLogin = payload;
         window.sessionStorage.hasLogin = true;
+
+        state.user = null;
+        state.password = null;
+
         router.push({ name: "List" });
       } else {
         state.showError = true;

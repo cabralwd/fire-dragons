@@ -3,7 +3,7 @@
     <Header />
     <div class="title">
       <h2>Bem-vindo(a)!</h2>
-      <p>Está é sua lista de Dragões cadastrados</p>
+      <p v-if="listDatas">Está é sua lista de Dragões cadastrados</p>
     </div>
     <main class="container content" v-if="listDatas">
       <transition-group tag="div" class="dragons-list">
@@ -35,16 +35,19 @@
         />
       </router-link>
     </main>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default {
   name: "List",
   components: {
     Header,
+    Footer,
   },
   data() {
     return {
@@ -150,7 +153,7 @@ export default {
 
 <style lang="scss" scoped>
 .content {
-  margin-bottom: 20rem;
+  margin-bottom: 15rem;
 }
 
 .title {
@@ -169,6 +172,7 @@ export default {
     font-size: 1rem;
     font-weight: 700;
     margin-top: 10px;
+    color: $two;
   }
 }
 
