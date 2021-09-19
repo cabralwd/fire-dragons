@@ -9,10 +9,11 @@ import {
   faPencilRuler,
   faPlus,
   faSignOutAlt,
+  faReplyAll,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faDragon, faTrash, faPencilRuler, faPlus, faSignOutAlt);
+library.add(faDragon, faTrash, faPencilRuler, faPlus, faSignOutAlt, faReplyAll);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 

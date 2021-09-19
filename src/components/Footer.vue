@@ -19,7 +19,11 @@ footer {
   justify-content: center;
 
   img {
-    width: 180px;
+    width: 80px;
+
+    @include tamanho-tela(tablet) {
+      width: 180px;
+    }
   }
 }
 </style>
