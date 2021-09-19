@@ -1,9 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Login from "../views/Login.vue";
-import List from "../views/List.vue";
-import Details from "../views/Details.vue";
-import Registration from "../views/Registration.vue";
 
 Vue.use(VueRouter);
 
@@ -15,12 +11,12 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: () => import("../views/Login.vue"),
   },
   {
     path: "/home",
     name: "List",
-    component: List,
+    component: () => import("../views/List.vue"),
     meta: {
       login: true,
     },
@@ -28,7 +24,7 @@ const routes = [
   {
     path: "/details",
     name: "Details",
-    component: Details,
+    component: () => import("../views/Details.vue"),
     meta: {
       login: true,
     },
@@ -36,7 +32,7 @@ const routes = [
   {
     path: "/registration",
     name: "Registration",
-    component: Registration,
+    component: () => import("../views/Registration.vue"),
     meta: {
       login: true,
     },

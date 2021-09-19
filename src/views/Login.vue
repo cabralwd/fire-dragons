@@ -1,11 +1,7 @@
 <template>
   <section class="container">
     <div>
-      <img
-        src="../assets/images/image-login-dragon.png"
-        alt="Logo"
-        class="logo"
-      />
+      <img src="../assets/images/image-dragon.png" alt="Logo" class="logo" />
       <h1>Fire Dragons</h1>
       <form id="form">
         <div class="content">
