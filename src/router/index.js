@@ -22,7 +22,7 @@ const routes = [
     },
   },
   {
-    path: "/details",
+    path: "/details/:id",
     name: "Details",
     component: () => import("../views/Details.vue"),
     meta: {

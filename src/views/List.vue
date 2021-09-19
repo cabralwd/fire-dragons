@@ -4,11 +4,16 @@
     <div class="title">
       <h2>Bem-vindo(a)!</h2>
       <p v-if="listDatas">Está é sua lista de Dragões cadastrados</p>
+      <p v-else>Carregando...</p>
     </div>
     <main class="container content" v-if="listDatas">
       <transition-group tag="div" class="dragons-list">
         <div v-for="data in listDatas" :key="data.id">
-          <router-link tag="div" to="/details" class="dragon">
+          <router-link
+            tag="div"
+            :to="{ name: 'Details', params: { id: data.id } }"
+            class="dragon"
+          >
             <font-awesome-icon :icon="['fas', 'dragon']" />
             <h3>{{ data.name }}</h3>
             <p>{{ data.type }}</p>
@@ -27,13 +32,7 @@
           />
         </div>
       </transition-group>
-      <router-link to="/registration" class="plus-register">
-        <font-awesome-icon
-          :icon="['fa', 'plus']"
-          class=""
-          title="clique aqui para criar um Dragão"
-        />
-      </router-link>
+      <CreateDragon />
     </main>
     <Footer />
   </div>
@@ -42,12 +41,14 @@
 <script>
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CreateDragon from "@/components/CreateDragon";
 
 export default {
   name: "List",
   components: {
     Header,
     Footer,
+    CreateDragon,
   },
   data() {
     return {
@@ -179,12 +180,13 @@ export default {
 .dragons-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 140px));
-  gap: 90px 30px;
+  gap: 90px 20px;
   justify-content: center;
   text-align: center;
   margin-top: 60px;
 
-  @include tamanho-tela(celular) {
+  @include tamanho-tela(tablet) {
+    gap: 90px 30px;
     grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
   }
 
@@ -204,7 +206,7 @@ export default {
     cursor: pointer;
     transition: transform 0.2s ease-out;
 
-    @include tamanho-tela(celular) {
+    @include tamanho-tela(tablet) {
       height: 150px;
     }
 
@@ -257,30 +259,6 @@ export default {
         fill: $error;
       }
     }
-  }
-}
-
-.plus-register {
-  background-color: $two;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 60px 15px 15px 15px;
-  width: 60px;
-  height: 60px;
-  border-radius: 100%;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-
-  @include tamanho-tela(desktop) {
-    right: 10px;
-    bottom: 10px;
-  }
-
-  svg {
-    width: 35px;
-    height: 35px;
   }
 }
 </style>
