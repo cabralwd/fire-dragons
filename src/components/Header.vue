@@ -1,13 +1,25 @@
 <template>
   <header class="container">
     <h1>Fire Dragons</h1>
-    <router-link to="/login">deslogar</router-link>
+    <a @click="logout()" class="logout"
+      ><font-awesome-icon :icon="['fa', 'sign-out-alt']" /> sair</a
+    >
   </header>
 </template>
 
 <script>
 export default {
   name: "Header",
+  methods: {
+    async logout() {
+      let exitQuestion = confirm("Tem certeza que deseja sair?");
+
+      if (exitQuestion) {
+        await sessionStorage.clear();
+        await this.$router.push("login");
+      }
+    },
+  },
 };
 </script>
 
@@ -27,6 +39,11 @@ header {
     font-size: 1.875rem;
     text-align: center;
     color: $three;
+  }
+
+  .logout {
+    text-transform: uppercase;
+    cursor: pointer;
   }
 }
 </style>
