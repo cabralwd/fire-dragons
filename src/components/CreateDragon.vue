@@ -3,7 +3,7 @@
     <font-awesome-icon
       :icon="['fa', 'plus']"
       class=""
-      title="clique aqui para criar um Dragão"
+      title="clique aqui para criar um novo Dragão"
     />
   </router-link>
 </template>

@@ -8,7 +8,7 @@
       <img src="../assets/images/image-dragon.png" alt="" aria-hidden="true" />
     </a>
     <p>
-      Teste Técnico - <a href="https://www.cwi.com.br">CWi</a> -
+      Teste Técnico - <a href="https://www.cwi.com.br" target="blank">CWi</a> -
       {{ dateY }}
     </p>
   </footer>

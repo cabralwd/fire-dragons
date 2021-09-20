@@ -1,6 +1,6 @@
 <template>
   <header class="container">
-    <router-link to="home" class="logo">
+    <router-link to="/home" class="logo">
       <h1>Fire Dragons</h1>
     </router-link>
     <a @click="logout()" class="logout"
