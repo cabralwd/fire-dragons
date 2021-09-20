@@ -51,6 +51,10 @@ input {
   font-family: "Nunito", sans-serif;
   font-weight: 700;
   font-size: 1.2rem;
+
+  &[type="password"] {
+    padding: 10px 50px 10px 15px;
+  }
 }
 
 ::-webkit-input-placeholder,
@@ -110,5 +114,28 @@ label {
   @include tamanho-tela(desktop) {
     padding: 0 15px;
   }
+}
+
+.fade-leave {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.6s ease-in;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.fade-enter-to {
+  opacity: 1;
 }
 </style>

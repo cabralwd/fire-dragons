@@ -2,25 +2,31 @@
   <div class="wrapper">
     <Header />
     <div>
-      <div v-if="dragon" class="container">
+      <div class="container">
         <Back />
-        <h2 class="name">{{ dragon.name }}</h2>
-        <main class="content">
-          <font-awesome-icon :icon="['fas', 'dragon']" class="dragon" />
-          <ul class="details">
-            <li>
-              <p>Data de nascimento:</p>
-              <h4>{{ dragon.createdAt | formatDate }}</h4>
-            </li>
-            <li>
-              <p>Tipo do dragão:</p>
-              <h4>{{ dragon.type }}</h4>
-            </li>
-          </ul>
-        </main>
+        <transition-group tag="div" name="fade">
+          <div v-if="dragon" key="infos">
+            <h2 class="name">{{ dragon.name }}</h2>
+            <main class="content">
+              <font-awesome-icon :icon="['fas', 'dragon']" class="dragon" />
+              <ul class="details">
+                <li>
+                  <p>Data de criação:</p>
+                  <h4>{{ dragon.createdAt | formatDate }}</h4>
+                </li>
+                <li>
+                  <p>Tipo do dragão:</p>
+                  <h4>{{ dragon.type }}</h4>
+                </li>
+              </ul>
+            </main>
+          </div>
+          <p v-else key="loading" class="loading">
+            Carregando...
+          </p>
+        </transition-group>
       </div>
-      <p v-else class="carregando">Carregando...</p>
-      <CreateDragon />
+      <CreateDragon key="registration" />
     </div>
     <Footer />
   </div>
@@ -85,7 +91,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.carregando {
+.loading {
   text-align: center;
   text-transform: uppercase;
   font-size: 1rem;

@@ -1,9 +1,14 @@
 <template>
   <section class="container">
-    <div>
-      <img src="../assets/images/image-dragon.png" alt="Logo" class="logo" />
-      <h1>Fire Dragons</h1>
-      <form id="form">
+    <transition-group name="fade" tag="div" appear>
+      <img
+        src="../assets/images/image-dragon.png"
+        alt="Logo"
+        class="logo"
+        key="image"
+      />
+      <h1 key="title">Fire Dragons</h1>
+      <form id="form" key="form">
         <div class="content">
           <label for="user">Login</label>
           <input
@@ -18,10 +23,17 @@
           <label for="password">Senha</label>
           <input
             v-model="password"
-            type="password"
+            :type="showPassword"
             name="password"
             id="password"
             placeholder="●●●●●"
+          />
+          <font-awesome-icon
+            v-if="this.$store.state.password"
+            @click="showPasswordInput"
+            :icon="['fa', `${typeIconPassword}`]"
+            class="show"
+            size="40px"
           />
         </div>
         <button
@@ -32,8 +44,10 @@
           Acessar
         </button>
       </form>
-      <span v-if="showError" class="error">Usuário ou senha Inválidos</span>
-    </div>
+      <span v-if="showError" class="error" key="error"
+        >Usuário ou senha Inválidos</span
+      >
+    </transition-group>
   </section>
 </template>
 
@@ -42,6 +56,12 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Login",
+  data() {
+    return {
+      showPassword: "password",
+      typeIconPassword: "eye",
+    };
+  },
   computed: {
     ...mapState(["showError"]),
     user: {
@@ -71,6 +91,19 @@ export default {
     isLogged() {
       if (window.sessionStorage.hasLogin) {
         this.$router.push({ name: "List" });
+      }
+    },
+    showPasswordInput() {
+      let hasContentInput = this.$store.state.password;
+
+      if (hasContentInput) {
+        if (this.showPassword === "text") {
+          this.showPassword = "password";
+          this.typeIconPassword = "eye";
+        } else {
+          this.showPassword = "text";
+          this.typeIconPassword = "eye-slash";
+        }
       }
     },
   },
@@ -136,6 +169,25 @@ h1 {
 
   .content {
     position: relative;
+  }
+
+  .show {
+    position: absolute;
+    top: 30%;
+    transform: translateY(-50%);
+    right: 15px;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+
+    @include tamanho-tela(tablet) {
+      width: 24px;
+      height: 24px;
+    }
+
+    path {
+      fill: $three;
+    }
   }
 }
 </style>

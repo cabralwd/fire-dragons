@@ -2,13 +2,15 @@
   <div class="wrapper">
     <Header />
     <div>
-      <div class="title">
-        <h2>Bem-vindo(a)!</h2>
-        <p v-if="listDatas">Está é sua lista de Dragões cadastrados</p>
-        <p v-else>Carregando...</p>
-      </div>
+      <transition-group class="title" name="fade" tag="div" appear>
+        <h2 key="title">Bem-vindo(a)!</h2>
+        <p v-if="listDatas" key="subtitle">
+          Está é sua lista de Dragões cadastrados
+        </p>
+        <p v-else key="loading">Carregando...</p>
+      </transition-group>
       <main class="container content" v-if="listDatas">
-        <transition-group tag="div" class="dragons-list">
+        <transition-group class="dragons-list" name="fade" tag="div" appear>
           <div v-for="data in listDatas" :key="data.id">
             <router-link
               tag="div"
