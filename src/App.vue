@@ -93,6 +93,13 @@ label {
   }
 }
 
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .container {
   max-width: 1140px;
   position: relative;

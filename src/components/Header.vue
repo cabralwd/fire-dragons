@@ -32,6 +32,7 @@ header {
   justify-content: space-between;
   padding-top: 30px;
   padding-bottom: 30px;
+  width: 100%;
 
   .logo {
     text-decoration: none;

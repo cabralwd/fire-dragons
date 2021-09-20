@@ -1,39 +1,41 @@
 <template>
-  <div>
+  <div class="wrapper">
     <Header />
-    <div class="title">
-      <h2>Bem-vindo(a)!</h2>
-      <p v-if="listDatas">Está é sua lista de Dragões cadastrados</p>
-      <p v-else>Carregando...</p>
+    <div>
+      <div class="title">
+        <h2>Bem-vindo(a)!</h2>
+        <p v-if="listDatas">Está é sua lista de Dragões cadastrados</p>
+        <p v-else>Carregando...</p>
+      </div>
+      <main class="container content" v-if="listDatas">
+        <transition-group tag="div" class="dragons-list">
+          <div v-for="data in listDatas" :key="data.id">
+            <router-link
+              tag="div"
+              :to="{ name: 'Details', params: { id: data.id } }"
+              class="dragon"
+            >
+              <font-awesome-icon :icon="['fas', 'dragon']" />
+              <h3>{{ data.name }}</h3>
+              <p>{{ data.type }}</p>
+            </router-link>
+            <font-awesome-icon
+              @click="editItem(data.id, data.name, data.type)"
+              :icon="['fas', 'pencil-ruler']"
+              class="icon-options"
+              :title="`Editar '${data.name}'`"
+            />
+            <font-awesome-icon
+              @click="removeItem(data.id, data.name)"
+              :icon="['fas', 'trash']"
+              class="icon-options"
+              :title="`Excluir '${data.name}'`"
+            />
+          </div>
+        </transition-group>
+        <CreateDragon />
+      </main>
     </div>
-    <main class="container content" v-if="listDatas">
-      <transition-group tag="div" class="dragons-list">
-        <div v-for="data in listDatas" :key="data.id">
-          <router-link
-            tag="div"
-            :to="{ name: 'Details', params: { id: data.id } }"
-            class="dragon"
-          >
-            <font-awesome-icon :icon="['fas', 'dragon']" />
-            <h3>{{ data.name }}</h3>
-            <p>{{ data.type }}</p>
-          </router-link>
-          <font-awesome-icon
-            @click="editItem(data.id, data.name, data.type)"
-            :icon="['fas', 'pencil-ruler']"
-            class="icon-options"
-            :title="`Editar '${data.name}'`"
-          />
-          <font-awesome-icon
-            @click="removeItem(data.id, data.name)"
-            :icon="['fas', 'trash']"
-            class="icon-options"
-            :title="`Excluir '${data.name}'`"
-          />
-        </div>
-      </transition-group>
-      <CreateDragon />
-    </main>
     <Footer />
   </div>
 </template>
@@ -154,7 +156,8 @@ export default {
 
 <style lang="scss" scoped>
 .content {
-  margin-bottom: 15rem;
+  margin-bottom: 5rem;
+  min-height: 100vh;
 }
 
 .title {

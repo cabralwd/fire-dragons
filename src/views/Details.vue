@@ -1,26 +1,28 @@
 <template>
-  <div>
+  <div class="wrapper">
     <Header />
-    <div v-if="dragon" class="container">
-      <Back />
-      <h2 class="name">{{ dragon.name }}</h2>
-      <main class="content">
-        <font-awesome-icon :icon="['fas', 'dragon']" class="dragon" />
-        <ul class="details">
-          <li>
-            <p>Data de nascimento:</p>
-            <h4>{{ dragon.createdAt | formatDate }}</h4>
-          </li>
-          <li>
-            <p>Tipo do dragão:</p>
-            <h4>{{ dragon.type }}</h4>
-          </li>
-        </ul>
-      </main>
+    <div>
+      <div v-if="dragon" class="container">
+        <Back />
+        <h2 class="name">{{ dragon.name }}</h2>
+        <main class="content">
+          <font-awesome-icon :icon="['fas', 'dragon']" class="dragon" />
+          <ul class="details">
+            <li>
+              <p>Data de nascimento:</p>
+              <h4>{{ dragon.createdAt | formatDate }}</h4>
+            </li>
+            <li>
+              <p>Tipo do dragão:</p>
+              <h4>{{ dragon.type }}</h4>
+            </li>
+          </ul>
+        </main>
+      </div>
+      <p v-else class="carregando">Carregando...</p>
+      <CreateDragon />
     </div>
-    <p v-else class="carregando">Carregando...</p>
     <Footer />
-    <CreateDragon />
   </div>
 </template>
 
