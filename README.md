@@ -37,7 +37,7 @@ yarn build
 <br />
 
 ## How was the project done 
-- [x] Creating a layout using figma;
+- [x] [Creating a layout using figma;](https://www.figma.com/proto/ceDGwSjeJXe3R0nYzHiN2j/Fire-Dragons?page-id=0%3A1&node-id=119%3A637&viewport=252%2C48%2C0.54&scaling=scale-down-width)
 - [x] The layout is in pdf at the root of the project;
 - [x] Analyzing brifieng for a better development strategy;
 - [x] Minimal plugins were used, they are: fontawesome and moment.js;
