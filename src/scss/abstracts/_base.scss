@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+  transition: color 0.05s, background-color 0.1s;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  font-weight: 300;
+  background: rgba($one, 0.87);
+  color: $two;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: rgba($four, 0.8);
+
+  &:hover {
+    color: $four;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.container {
+  position: relative;
+  max-width: 1140px;
+  padding: 0 30px;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include tamanho-tela(desktop) {
+    padding: 0 15px;
+  }
+}

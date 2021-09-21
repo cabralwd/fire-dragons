@@ -1,0 +1,68 @@
+::placeholder {
+  color: rgba($two, 0.1);
+}
+::-webkit-input-placeholder {
+  color: rgba($two, 0.1);
+}
+:-ms-input-placeholder {
+  color: rgba($two, 0.1);
+}
+
+#form {
+  max-width: 350px;
+  width: 100%;
+  margin: 30px auto 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  .content {
+    position: relative;
+  }
+
+  input {
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid $four;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    color: $two;
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+
+    &[type="password"] {
+      padding: 10px 50px 10px 15px;
+    }
+  }
+
+  label {
+    position: absolute;
+    top: -15px;
+    left: 5px;
+    background-color: $three;
+    padding: 3px 6px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .show {
+    position: absolute;
+    top: 30%;
+    transform: translateY(-50%);
+    right: 15px;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+
+    @include tamanho-tela(tablet) {
+      width: 24px;
+      height: 24px;
+    }
+
+    path {
+      fill: $three;
+    }
+  }
+}

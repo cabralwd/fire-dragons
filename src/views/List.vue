@@ -1,15 +1,21 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" id="list">
     <Header />
-    <div>
+
+    <main>
       <transition-group class="title" name="fade" tag="div" appear>
         <h2 key="title">Bem-vindo(a)!</h2>
-        <p v-if="listDatas" key="subtitle">
-          Está é sua lista de Dragões cadastrados
+        <p key="subtitle">
+          <span v-if="listDatas.length">
+            Esta é sua lista de Dragões cadastrados
+          </span>
+          <span v-else>
+            Não há dragões Cadastrados no momento
+          </span>
         </p>
-        <p v-else key="loading">Carregando...</p>
       </transition-group>
-      <main class="container content" v-if="listDatas">
+
+      <section class="container" v-if="listDatas">
         <transition-group class="dragons-list" name="fade" tag="div" appear>
           <div v-for="data in listDatas" :key="data.id">
             <router-link
@@ -21,6 +27,7 @@
               <h3>{{ data.name }}</h3>
               <p>{{ data.type }}</p>
             </router-link>
+
             <font-awesome-icon
               @click="editItem(data.id, data.name, data.type)"
               :icon="['fas', 'pencil-ruler']"
@@ -35,9 +42,11 @@
             />
           </div>
         </transition-group>
-        <CreateDragon />
-      </main>
-    </div>
+      </section>
+    </main>
+
+    <CreateDragon />
+    <Loading />
     <Footer />
   </div>
 </template>
@@ -45,21 +54,27 @@
 <script>
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Loading from "@/components/Loading";
 import CreateDragon from "@/components/CreateDragon";
+
+import { mapMutations } from "vuex";
+import { encodeFormData } from "../helpers";
 
 export default {
   name: "List",
   components: {
     Header,
     Footer,
+    Loading,
     CreateDragon,
   },
   data() {
     return {
-      listDatas: null,
+      listDatas: [],
     };
   },
   methods: {
+    ...mapMutations(["LOADING"]),
     getDatas() {
       fetch("http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/", {
         method: "GET",
@@ -76,194 +91,85 @@ export default {
               return true;
             }
           });
+
           this.listDatas = response;
+          this.LOADING(false);
         })
-        .catch((error) =>
+        .catch((error) => {
           alert(
-            `Houve um problema. Tente novamente mais tarde! \nCódigo do erro: ${error}`
-          )
-        );
+            `❌ Houve um problema. Tente novamente mais tarde! \nCódigo do erro: ${error}`
+          );
+        });
     },
     editItem(id, name, type) {
-      let promptName = prompt(`Infome o novo nome, ou deixe como está`, name);
-      let promptType = prompt(`Infome o novo tipo, ou deixe como está`, type);
+      let promptName = prompt(`Infome o novo nome:`, name);
+      let promptType = prompt(`Infome o novo tipo:`, type);
       const formData = {};
 
       formData.name = promptName;
       formData.type = promptType;
 
-      const encodeFormData = (data) => {
-        return Object.keys(data)
-          .map(
-            (key) =>
-              encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-          )
-          .join("&");
-      };
-
       if (promptName !== name || promptType !== type) {
-        fetch(
-          `http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/${id}`,
-          {
-            method: "PUT",
-            body: encodeFormData(formData),
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        )
-          .then(() => {
-            if (formData.name !== null || formData.type !== null) {
-              this.getDatas();
-              alert(`Dragão atualizado com sucesso 🐲!`);
+        if (!!promptName && !!promptType) {
+          this.LOADING(true);
+          fetch(
+            `http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/${id}`,
+            {
+              method: "PUT",
+              body: encodeFormData(formData),
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
             }
-          })
-          .catch((error) =>
-            alert(
-              `Houve um problema. \nTente novamente mais tarde! \nCódigo do erro: ${error}`
-            )
-          );
+          )
+            .then(() => {
+              alert(`Dragão atualizado com sucesso 🐲!`);
+              this.LOADING(false);
+              this.getDatas();
+            })
+            .catch((error) => {
+              alert(
+                `❌ Houve um problema. \nTente novamente mais tarde! \nCódigo do erro: ${error}`
+              );
+              this.LOADING(false);
+            });
+        } else if (promptName === "" || promptType === "") {
+          alert(`❌ Cuidado, os dados não podem estar em branco!`);
+        }
       }
     },
     removeItem(id, name) {
       let confirmRemove = confirm(
-        `Tem certeza que deseja remover o dragão "${name}"?`
+        `Tem certeza que deseja remover o dragão "${name}"❓`
       );
 
       if (confirmRemove) {
+        this.LOADING(true);
+
         fetch(
           `http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/${id}`,
           { method: "DELETE" }
         )
           .then(() => {
             this.getDatas();
-            alert(`${name} excluido com sucesso`);
+
+            this.LOADING(false);
           })
-          .catch((error) =>
+          .catch((error) => {
             alert(
-              `Houve um problema. \nTente novamente mais tarde! \nCódigo do erro: ${error}`
-            )
-          );
+              `❌ Houve um problema. \nTente novamente mais tarde! \nCódigo do erro: ${error}`
+            );
+            this.LOADING(false);
+          });
       }
     },
   },
   created() {
     document.title = "List";
+    this.LOADING(true);
   },
   mounted() {
     this.getDatas();
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.content {
-  margin-bottom: 5rem;
-  min-height: 100vh;
-}
-
-.title {
-  text-align: center;
-  h2 {
-    font-family: "DragonForcE", Impact, Haettenschweiler, "Arial Narrow Bold",
-      sans-serif;
-    font-weight: normal;
-    font-style: normal;
-    font-size: 3.75rem;
-    text-align: center;
-    color: $three;
-  }
-  p {
-    text-transform: uppercase;
-    font-size: 1rem;
-    font-weight: 700;
-    margin-top: 10px;
-    color: $two;
-  }
-}
-
-.dragons-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 140px));
-  gap: 90px 20px;
-  justify-content: center;
-  text-align: center;
-  margin-top: 60px;
-
-  @include tamanho-tela(tablet) {
-    gap: 90px 30px;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
-  }
-
-  @include tamanho-tela(desktop) {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 160px));
-  }
-
-  .dragon {
-    background-color: rgba($four, 0.8);
-    height: 140px;
-    border-radius: 100%;
-    border: 4px solid $three;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    cursor: pointer;
-    transition: transform 0.2s ease-out;
-
-    @include tamanho-tela(tablet) {
-      height: 150px;
-    }
-
-    @include tamanho-tela(desktop) {
-      height: 160px;
-    }
-
-    &:hover {
-      transform: scale(1.1);
-
-      &::after {
-        position: absolute;
-        content: "mais detalhes";
-        background-color: rgba($three, 0.9);
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        border-radius: inherit;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.5rem;
-        font-weight: 700;
-      }
-    }
-
-    svg {
-      width: 60px;
-      height: 60px;
-    }
-
-    h3 {
-      font-weight: 700;
-    }
-
-    p {
-      font-size: 0.85rem;
-    }
-  }
-
-  .icon-options {
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    margin: 15px 5px 0px 5px;
-
-    &:hover {
-      path {
-        fill: $error;
-      }
-    }
-  }
-}
-</style>

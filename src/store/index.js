@@ -12,13 +12,16 @@ export default new Vuex.Store({
     password: null,
     hasLogin: false,
     showError: false,
+    isLoading: false,
   },
   mutations: {
     USER_INSERT(state, payload) {
       state.user = payload;
+      state.showError = false;
     },
     PASS_INSERT(state, payload) {
       state.password = payload;
+      state.showError = false;
     },
     LOGADO(state, payload) {
       if (state.user === "@flygon" && state.password === "flygonfire2021") {
@@ -33,11 +36,13 @@ export default new Vuex.Store({
         state.showError = true;
       }
     },
+    LOADING(state, payload) {
+      state.isLoading = payload;
+    },
   },
   actions: {
     validateLogin({ commit }) {
       commit("LOGADO");
     },
   },
-  modules: {},
 });

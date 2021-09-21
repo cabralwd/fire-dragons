@@ -1,0 +1,111 @@
+#list {
+  .title {
+    h2 {
+      @include fontDisplay;
+      font-size: 3.75rem;
+      color: $three;
+    }
+
+    p {
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 10px;
+      color: $two;
+    }
+  }
+
+  .dragons-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 140px));
+    gap: 90px 20px;
+    justify-content: center;
+    text-align: center;
+    margin-top: 60px;
+
+    @include tamanho-tela(tablet) {
+      gap: 90px 30px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
+    }
+
+    @include tamanho-tela(desktop) {
+      grid-template-columns: repeat(auto-fit, minmax(160px, 160px));
+    }
+
+    .dragon {
+      background-color: rgba($one, 0.4);
+      height: 140px;
+      border-radius: 100%;
+      border: 4px solid $three;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.2s ease-out;
+
+      @include tamanho-tela(tablet) {
+        height: 150px;
+      }
+
+      @include tamanho-tela(desktop) {
+        height: 160px;
+      }
+
+      &:hover {
+        transform: scale(1.1);
+
+        &::after {
+          position: absolute;
+          content: "abrir";
+          text-transform: uppercase;
+          background-color: rgba($three, 0.9);
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          border-radius: inherit;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.5rem;
+          font-weight: 700;
+        }
+      }
+
+      svg {
+        width: 60px;
+        height: 60px;
+
+        path {
+          fill: rgba($four, 0.7);
+        }
+      }
+
+      h3 {
+        font-size: 1rem;
+        color: $two;
+        font-weight: 700;
+      }
+
+      p {
+        font-size: 0.85rem;
+      }
+    }
+
+    .icon-options {
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      margin: 15px 5px 0px 5px;
+      color: $two;
+
+      &:hover {
+        path {
+          fill: $four;
+        }
+      }
+    }
+  }
+}

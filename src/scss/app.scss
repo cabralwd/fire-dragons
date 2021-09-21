@@ -1,0 +1,22 @@
+// Abstracts
+@import "~reset-css/sass/reset";
+@import "./abstracts/variables";
+@import "./abstracts/mixins";
+@import "./abstracts/base";
+@import "./abstracts/animations";
+
+// Components
+@import "./components/inputs";
+@import "./components/buttons";
+@import "./components/back";
+@import "./components/loading";
+
+// Layout
+@import "./layout/header";
+@import "./layout/footer";
+
+// Pages
+@import "./pages/login";
+@import "./pages/list";
+@import "./pages/registration";
+@import "./pages/details";

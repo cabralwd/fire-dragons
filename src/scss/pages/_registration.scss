@@ -1,0 +1,24 @@
+#registration {
+  .title {
+    @include fontDisplay;
+    padding-top: 40px;
+    font-size: 3rem;
+    color: $three;
+
+    @include tamanho-tela(tablet) {
+      font-size: 3.75rem;
+      padding-top: 0;
+    }
+  }
+
+  .dragon {
+    width: 178px;
+    height: 142px;
+    margin: 60px auto 30px auto;
+    display: block;
+
+    path {
+      fill: rgba($two, 0.7);
+    }
+  }
+}

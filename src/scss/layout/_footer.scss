@@ -1,0 +1,19 @@
+#footer {
+  margin-top: 12rem;
+  padding: 0px 0px 30px 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  img {
+    width: 80px;
+
+    @include tamanho-tela(tablet) {
+      width: 180px;
+    }
+  }
+
+  p {
+    margin-top: 10px;
+  }
+}

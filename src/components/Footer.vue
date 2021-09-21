@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer id="footer">
     <a
       href="https://github.com/cabralwd"
       target="_blank"
@@ -8,7 +8,8 @@
       <img src="../assets/images/image-dragon.png" alt="" aria-hidden="true" />
     </a>
     <p>
-      Teste Técnico - <a href="https://www.cwi.com.br" target="blank">CWi</a> -
+      Teste Técnico -
+      <a href="https://www.cwi.com.br" target="blank">CWi</a> -
       {{ dateY }}
     </p>
   </footer>
@@ -25,25 +26,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-footer {
-  clear: both;
-  padding: 30px 0;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  img {
-    width: 80px;
-
-    @include tamanho-tela(tablet) {
-      width: 180px;
-    }
-  }
-
-  p {
-    margin-top: 10px;
-  }
-}
-</style>

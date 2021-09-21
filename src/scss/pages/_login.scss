@@ -1,0 +1,47 @@
+.container-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+
+  .logo {
+    display: block;
+    margin: 0 auto;
+    width: calc(256px / 1.1);
+    padding: 0px 0px 20px 0px;
+
+    @include tamanho-tela(tablet) {
+      width: calc(256px / 1.1);
+    }
+
+    @include tamanho-tela(desktop) {
+      width: 180px;
+    }
+    @include tamanho-tela(desktop-up) {
+      width: 256px;
+    }
+  }
+
+  .title {
+    @include fontDisplay;
+    font-size: 3.75rem;
+    text-align: center;
+    color: $three;
+  }
+
+  .legend {
+    font-size: 0.9rem;
+    margin-top: 8px;
+    text-align: center;
+    display: block;
+    font-weight: 700;
+  }
+}
+
+.error {
+  color: $error;
+  display: block;
+  text-align: center;
+  padding: 20px 0;
+}

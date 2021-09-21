@@ -1,0 +1,73 @@
+#details {
+  .name {
+    padding-top: 40px;
+    @include fontDisplay;
+    font-size: 3rem;
+    color: $three;
+
+    @include tamanho-tela(tablet) {
+      font-size: 3.75rem;
+      padding-top: 0;
+    }
+  }
+
+  .content {
+    margin-top: 60px;
+    margin-bottom: 160px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+
+    @include tamanho-tela(tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dragon {
+      width: 178px;
+      height: 142px;
+      margin: 0 auto;
+
+      @include tamanho-tela(tablet) {
+        margin: 0;
+        width: 445px;
+        height: 356px;
+      }
+
+      path {
+        fill: rgba($two, 0.7);
+      }
+    }
+
+    .details {
+      text-align: center;
+
+      @include tamanho-tela(tablet) {
+        text-align: initial;
+      }
+
+      li {
+        &:first-child {
+          margin-bottom: 40px;
+        }
+
+        p {
+          font-size: 1.2rem;
+          text-transform: uppercase;
+          font-weight: 700;
+          margin-bottom: 5px;
+        }
+
+        h4 {
+          font-family: "DragonForcE", Impact, Haettenschweiler,
+            "Arial Narrow Bold", sans-serif;
+          font-weight: normal;
+          font-style: normal;
+          font-size: 2.5rem;
+          color: $three;
+          line-height: 1.2;
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+}
