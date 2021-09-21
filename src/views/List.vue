@@ -76,7 +76,7 @@ export default {
   methods: {
     ...mapMutations(["LOADING"]),
     getDatas() {
-      fetch("http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/", {
+      fetch("https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/", {
         method: "GET",
       })
         .then((response) => {
@@ -113,7 +113,7 @@ export default {
         if (!!promptName && !!promptType) {
           this.LOADING(true);
           fetch(
-            `http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/${id}`,
+            `https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/${id}`,
             {
               method: "PUT",
               body: encodeFormData(formData),
@@ -147,7 +147,7 @@ export default {
         this.LOADING(true);
 
         fetch(
-          `http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/${id}`,
+          `https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/${id}`,
           { method: "DELETE" }
         )
           .then(() => {

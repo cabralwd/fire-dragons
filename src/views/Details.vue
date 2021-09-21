@@ -62,7 +62,7 @@ export default {
   methods: {
     ...mapMutations(["LOADING"]),
     getItem(id) {
-      fetch(`http://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/${id}`, {
+      fetch(`https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/${id}`, {
         method: "GET",
       })
         .then((response) => {
